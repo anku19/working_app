@@ -1,0 +1,42 @@
+<center><p id="notice"><%= notice %></p>
+
+
+
+<center><h1>Listing Users Info</h1></center>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user|%>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Show', user %></td>
+        <% if user_signed_in? %>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path %>
+<br>
+
+
+<% if user_signed_in? %>
+  <%= button_to "logout", destroy_user_session_path, method: :delete %>
+<% end %>
+
+</center>
